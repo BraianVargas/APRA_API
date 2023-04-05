@@ -1,8 +1,8 @@
 import mysql.connector
+import json
 from flask import Flask, jsonify
 
 app = Flask(__name__)
-
 @app.route('/datos_historicos')
 def obtener_datos_historicos():
     # Establecer la conexión con la base de datos
@@ -16,45 +16,33 @@ def obtener_datos_historicos():
     # Crear un cursor para ejecutar las consultas
     mycursor = mydb.cursor()
 
-    # Definir el número de registros por página
-    page_size = 500
-
     # Definir la consulta SQL
     sql = "SELECT * FROM datos_historicos"
+    mycursor.execute(sql)
+    result= mycursor.fetchall()
 
-    # Obtener el número total de registros
-    mycursor.execute("SELECT COUNT(*) FROM datos_historicos")
-    result = mycursor.fetchone()
-    total_records = result[0]
+    # Obtener los nombres de las columnas
+    column_names = [desc[0] for desc in mycursor.description]
 
-    # Calcular el número total de páginas
-    total_pages = (total_records // page_size) + 1
+    # Crear una lista para almacenar los objetos JSON de cada fila de datos
+    json_list = []
 
-    # Recuperar los registros de cada página
-    datos_historicos = []
-    for page in range(total_pages):
-        offset = page * page_size
-        query = f"{sql} LIMIT {page_size} OFFSET {offset}"
-        mycursor.execute(query)
-        results = mycursor.fetchall()
-        if page == 0:  # Incluye los nombres de las columnas en la primera página
-            column_names = [i[0] for i in mycursor.description]
-        for row in results:
-            datos_historicos.append(dict(zip(column_names, row)))
+    # Leer el archivo JSON
+    with open("data/glosary_historical.json", "r") as file:
+        data = json.load(file)
+        
+    # Iterar sobre los resultados y agregar cada fila de datos a la lista
+    for row in result:
+        # Crear un diccionario para almacenar los datos de esta fila
+        data_dict = {}
+        # Iterar sobre las columnas y agregar los valores al diccionario
+        for i, col_name in enumerate(column_names):
+            data_dict[data[col_name]] = row[i]
+        # Agregar el diccionario a la lista de objetos JSON
+        json_list.append(data_dict)
 
-
-    # Cerrar la conexión con la base de datos
-    mydb.close()
-
-    # Devolver los resultados como una respuesta JSON
-    return jsonify(datos_historicos)
-
-
-
-
-
-
-
+    # Devolver la lista de objetos JSON en formato JSON
+    return jsonify(json_list)
 
 
 if __name__ == '__main__':
