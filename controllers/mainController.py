@@ -34,7 +34,7 @@ def proccessData(type):
     json_list = []
 
     # Leer el archivo JSON
-    with open(f"data/glosary_{type}.json", "r") as file:
+    with open(f"./data/glosary_{type}.json", "r") as file:
         data = json.load(file)
 
     # Iterar sobre los resultados y agregar cada fila de datos a la lista
