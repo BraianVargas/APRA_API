@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from controllers. mainController import *
 
 app = Flask(__name__)
-
+app.config.from_pyfile("./data/config.py")
 
 @app.route('/historical')
 def getHistorical():
@@ -11,6 +11,10 @@ def getHistorical():
 @app.route('/monthly')
 def getMonthly():
     return proccessData("monthly")
+
+@app.route('/etl')
+def loadEtl():
+    return loadDatabase()
 
 
 if __name__ == '__main__':

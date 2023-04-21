@@ -1,21 +1,23 @@
 import mysql.connector
 import json
-from flask import Flask, jsonify
+from flask import jsonify, current_app, g
 
+def getDB():
+    if 'db' not in g:
+        g.db=mysql.connector.connect( 
+            host=current_app.config['DATABASE_HOST'],
+            user=current_app.config['DATABASE_USER'],
+            password=current_app.config['DATABASE_PASSWORD'],
+            database=current_app.config['DATABASE']
+        )
+        
+        g.c = g.db.cursor(dictionary=True)
+    return g.db, g.c
 
-def getDB(): 
-    # Establecer la conexión con la base de datos
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="apra_etl"
-    )
-    return mydb
 
 
 def proccessData(type):
-    db = getDB()
+    db, g= getDB()
     # Crear un cursor para ejecutar las consultas
     mycursor = db.cursor()
     
@@ -48,3 +50,7 @@ def proccessData(type):
         json_list.append(data_dict)
     # Devolver la lista de objetos JSON en formato JSON
     return jsonify(json_list)
+
+
+def loadDatabase():
+    pass
