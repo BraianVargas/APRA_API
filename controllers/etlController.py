@@ -7,7 +7,6 @@ from sqlalchemy import create_engine
 
 
 
-
 def abrev(text):
     words = text.split()
     initials = [word[0] for word in words]
@@ -19,6 +18,7 @@ def abrev(text):
 def fromURLtoDB():
     url = "https://www.apra.gov.au/monthly-authorised-deposit-taking-institution-statistics"
     response = requests.get(url)
+    
     soup = BeautifulSoup(response.content, "html.parser")
     excel_links = []
 
@@ -29,6 +29,8 @@ def fromURLtoDB():
             excel_links.append(href)
         else:
             pass
+        
+    print(excel_links)
 
     # Creamos las carpetas si no existen
     if not os.path.exists("./data/historical"):
@@ -41,6 +43,7 @@ def fromURLtoDB():
     for i, link in enumerate(excel_links):
         response = requests.get(link)
         filename = link.split("/")[-1].replace("%20","_")
+        print(filename)
         if i == 1:
             path = os.path.join("./data/monthly", filename)
         elif i == 2:
@@ -86,7 +89,7 @@ def loadHistorical():
 
 
     try:
-        engine = create_engine('mysql+mysqlconnector://root@127.0.0.1/apra_etl', connect_args={'connect_timeout': 120})
+        engine = create_engine('mysql+mysqlconnector://root@localhost/apra_etl', connect_args={'connect_timeout': 120})
 
         historical_df.to_sql('datos_historicos', con=engine, if_exists='replace', chunksize=1000)
     except Exception as e:
@@ -116,7 +119,7 @@ def loadMonthly():
                 # Update the DataFrame with the abbreviated column name
                 df.rename(columns={col: abbr}, inplace=True)
     try:
-        engine = create_engine('mysql+mysqlconnector://root@127.0.0.1/apra_etl', connect_args={'connect_timeout': 120})
+        engine = create_engine('mysql+mysqlconnector://root@localhost/apra_etl', connect_args={'connect_timeout': 120})
 
         df.to_sql('datos_mensuales', con=engine, if_exists='replace', chunksize=1000)
     except Exception as e:
