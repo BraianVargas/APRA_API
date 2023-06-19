@@ -26,9 +26,16 @@ def proccessData(his_mont):
 
     cursor.execute(sql)
     data = cursor.fetchall()
-    print(data[0])
-
-
+    # return data
+    
+    def addElement(i):
+        elements = []
+        for element in data:
+            if element[2] == abnList[i][0]:
+                elements.append(element)
+            else:
+                pass
+        return elements
     abnList = []
     [abnList.append(x) for x in abnRes if x not in abnList]
 
@@ -36,15 +43,9 @@ def proccessData(his_mont):
         "__values__":[
             {
                 "ABN" : abnList[i][0],
-                "__data__" : [
-                    { element } if element[2] == abnList[i][0] else "" for element in data 
-                ]
+                "__data__" : addElement(i) 
             } for i in range(len(abnList))
         ]
     }
 
-    return f"""
-            abnList: {len(abnList)} \n
-            result: {len(abnRes)} \n
-            DATA: \n { proccessedData }
-            """
+    return proccessedData
