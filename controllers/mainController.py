@@ -26,7 +26,6 @@ def proccessData(his_mont):
 
     cursor.execute(sql)
     data = cursor.fetchall()
-    # return data
     
     def addElement(i):
         elements = []
