@@ -60,6 +60,7 @@ def getDB():
         )
         c = db.cursor(dictionary=True)
         return db, c
+
 def loadHistorical():
     folder = "./data/historical/"
     files = os.listdir(folder)
@@ -86,7 +87,7 @@ def loadHistorical():
 
 
     try:
-        engine = create_engine('mysql+mysqlconnector://root@127.0.0.1/apra_etl', connect_args={'connect_timeout': 120})
+        engine = create_engine('mysql+mysqlconnector://root@localhost/apra_etl', connect_args={'connect_timeout': 120})
 
         historical_df.to_sql('datos_historicos', con=engine, if_exists='replace', chunksize=1000)
     except Exception as e:

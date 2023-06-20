@@ -14,27 +14,58 @@ def getDB():
     return g.db, g.c
 
 
+def transformInfo(data):
+    print(data)
 
-def proccessData(type):
+
+# def proccessData(type):
+#     db, g= getDB()
+
+#     mycursor = db.cursor()
+    
+#     sql = f"SELECT * FROM datos_{str(type)}"
+
+#     mycursor.execute(sql)
+#     result= mycursor.fetchall()
+
+#     column_names = [desc[0] for desc in mycursor.description]
+
+#     json_list = []
+
+#     with open(f"./data/glosario_{type}.json", "r") as file:
+#         data = json.load(file)
+
+#     for row in result:
+#         data_dict = {}
+#         for i, col_name in enumerate(column_names):
+#             data_dict[data[col_name]] = row[i]
+#         json_list.append(data_dict)
+#     return jsonify(json_list)
+
+
+def proccessData(his_mont):
     db, g= getDB()
 
-    mycursor = db.cursor()
+    cursor = db.cursor()
+    sql = f"SELECT * FROM datos_{str(his_mont)}"
+    abnReq = f"SELECT ABN FROM datos_{str(his_mont)}"
     
-    sql = f"SELECT * FROM datos_{str(type)}"
+    cursor.execute(abnReq)
+    abnRes = cursor.fetchall()
 
-    mycursor.execute(sql)
-    result= mycursor.fetchall()
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    data = json.dumps(data)
 
-    column_names = [desc[0] for desc in mycursor.description]
 
-    json_list = []
+    abnList = []
+    [abnList.append(x) for x in abnRes if x not in abnList]
 
-    with open(f"./data/glosario_{type}.json", "r") as file:
-        data = json.load(file)
+    proccessedData = []
 
-    for row in result:
-        data_dict = {}
-        for i, col_name in enumerate(column_names):
-            data_dict[data[col_name]] = row[i]
-        json_list.append(data_dict)
-    return jsonify(json_list)
+
+    return f"""
+            abnList: {len(abnList)} \n
+            result: {len(abnRes)} \n
+            DATA: \n { type(data) }
+            """
