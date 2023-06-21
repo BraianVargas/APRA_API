@@ -1,13 +1,12 @@
 # ---- PRODUCTION ----
 
-# DATABASE_HOST = 'TheDevArg.mysql.pythonanywhere-services.com'
-# DATABASE_USER = 'TheDevArg'
-# DATABASE_PASSWORD = '%VwaR*M%k5rHAVa'
-# DATABASE = 'TheDevArg$datamarket'
+# DATABASE_HOST = 'Flowkai.mysql.pythonanywhere-services.com'
+# DATABASE_USER = 'Flowkai'
+# DATABASE_PASSWORD = '41830596.-1a'
+# DATABASE = 'Flowkai$apra_etl'
 # SECRET_KEY = "GDtfDCFYjDhhGGHVsDAgSewKisaksd"
 # TRACK_MODIFICATIONS = False
 # CORS_HEADERS='Content-Type'
-
 
 # ---- DEVELOPMENT ---
 
