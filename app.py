@@ -7,11 +7,11 @@ app.config.from_pyfile("./data/config.py")
 
 @app.route('/historical')
 def getHistorical():
-    return proccessData("historicos")
+    return process_data("historicos")
 
 @app.route('/monthly')
 def getMonthly():
-    return proccessData("mensuales")
+    return process_data("mensuales")
 
 @app.route('/etl')
 def loadEtl():

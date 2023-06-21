@@ -1,89 +1,43 @@
 {
-     "IN": "InstitutionName",
+     "IN": "Institution_Name",
      "ABN": "ABN",
-     "CALA": "CashAndLiquidAssets",
-     "AOC": "AcceptancesOfCustomers",
-     "OVOAATHBS": "OutstandingValueOfAllAssetsThatHaveBeenSecuritised",
-     "LTNC": "LoansToNon-FinancialCorporations",
-     "OB": "OtherBorrowings",
-     "DTCHAFI": "DueToClearingHousesAndFinancialInstitutions",
-     "IS": "InvestmentSecurities",
-     "OI": "OtherInvestments",
-     "GLAA": "GrossLoansAndAdvances",
-     "VOHLS": "ValueOfHousingLoansSecuritised",
-     "OPBOSA": "OutstandingPrincipalBalanceOfSecuritisedAssets",
-     "TS": "TradingSecurities",
+     "CALA": "Cash_And_Liquid_Assets",
+     "AOC": "Acceptances_Of_Customers",
+     "OVOAATHBS": "Outstanding_Value_Of_All_Assets_That_Have_Been_Securitised",
+     "LTNC": "Loans_To_Non-Financial_Corporations",
+     "OB": "Other_Borrowings",
+     "DTCHAFI": "Due_To_Clearing_Houses_And_Financial_Institutions",
+     "IS": "Investment_Securities",
+     "OI": "Other_Investments",
+     "GLAA": "Gross_Loans_And_Advances",
+     "VOHLS": "Value_Of_Housing_Loans_Securitised",
+     "OPBOSA": "Outstanding_Principal_Balance_Of_Securitised_Assets",
+     "TS": "Trading_Securities",
      "Period": "Period",
-     "TRA": "TotalResidentAssets",
-     "LTOCC": "LoansToHouseholds:CreditCards",
-     "ILAA": "Intra-GroupLoansAndAdvances",
-     "VOHLSDTM": "ValueOfHousingLoansSecuritisedDuringTheMonth",
-     "LTFC": "LoansToFinancialCorporations",
-     "LTGG": "LoansToGeneralGovernment",
-     "LTHCC": "LoansToHouseholds:Housing:Owner-Occupied",
-     "LTHHI": "LoansToHouseholds:Housing:Investment",
-     "LTHO": "LoansToHouseholds:Other",
-     "LTCSOANI": "LoansToCommunityServiceOrganisationsAndNon-ProfitInstitutions",
-     "TGLAA": "TotalGrossLoansAndAdvances",
-     "TD": "TotalDeposits",
-     "DFH": "DepositsFromHouseholds",
-     "ODA": "OtherDepositAccounts",
-     "DFNC": "DepositsFromNon-FinancialCorporations",
-     "DFCSOANI": "DepositsFromCommunityServiceOrganisationsAndNon-ProfitInstitutions",
-     "TD": "TotalDeposits",
-     "BNALB": "Bonds,NotesAndLong-TermBorrowings",
-     "DFFC": "DepositsFromFinancialCorporations",
-     "COD": "CertificatesOfDeposit",
-     "TD": "TotalDeposits",
-     "LTHHO": "LoansToHouseholds:Housing:Owner-Occupied",
-     "LTHHI": "LoansToHouseholds:Housing:Investment",
+     "TRA": "Total_Resident_Assets",
+     "LTOCC": "Loans_To_Households_Credit_Cards",
+     "ILAA": "Intra-Group_Loans_And_Advances",
+     "VOHLSDTM": "Value_Of_Housing_Loans_Securitised_During_The_Month",
+     "LTFC": "Loans_To_Financial_Corporations",
+     "LTGG": "Loans_To_General_Government",
+     "LTHCC": "Loans_To_Households_Housing_Owner-Occupied",
+     "LTHHI": "Loans_To_Households_Housing_Investment",
+     "LTHO": "Loans_To_Households_Other",
+     "LTCSOANI": "Loans_To_Community_Service_Organisations_And_Non-Profit_Institutions",
+     "TGLAA": "Total_Gross_Loans_And_Advances",
+     "TD": "Total_Deposits",
+     "DFH": "Deposits_From_Households",
+     "ODA": "Other_Deposit_Accounts",
+     "DFNC": "Deposits_From_Non-Financial_Corporations",
+     "DFCSOANI": "Deposits_From_Community_Service_Organisations_And_Non-Profit_Institutions",
+     "BNALB": "Bonds_Notes_And_Long-Term_Borrowings",
+     "DFFC": "Deposits_From_Financial_Corporations",
+     "COD": "Certificates_Of_Deposit",
+     "LTHHO": "Loans_To_Households_Housing_Owner-Occupied",
+     "LTHHI": "Loans_To_Households_Housing_Investment",
      "index": "Index",
      "ID": "Id",
-     "Period": "Period",
-     "DFGG": "DepositsFromGeneralGovernment",
+     "DFGG": "Deposits_From_General_Government",
      "Acceptances": "Acceptances",
-     "Total deposits.1": "TotalDeposit"
+     "Total_deposits.1": "Total_Deposit"
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
