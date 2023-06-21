@@ -14,8 +14,6 @@ def getDB():
     return g.db, g.c
 
 
-import json
-
 def process_data(his_mont):
     db, g = getDB()
 
@@ -40,7 +38,7 @@ def process_data(his_mont):
         with open(path) as json_file:
             file_data_json = json.load(json_file)
 
-        column_names = [file_data_json[col].lower() for col in req_col_names]
+        column_names = [file_data_json.get(col, col).lower() for col in req_col_names]
         return column_names
 
     def add_element(abn):
