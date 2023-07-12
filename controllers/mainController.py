@@ -19,11 +19,11 @@ def process_data(his_mont):
 
     cursor = db.cursor()
 
-    abn = f"SELECT * FROM datos_{str(his_mont)} LIMIT 150"
-    abn_req = f"SELECT DISTINCT ABN FROM datos_{str(his_mont)} LIMIT 150"
+    abn = f"SELECT * FROM datos_{str(his_mont)} "
+    abn_req = f"SELECT DISTINCT ABN FROM datos_{str(his_mont)} "
     sql_col_names = f"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'datos_{his_mont}'"
     
-    cursor.execute(sql)
+    cursor.execute(abn)
     data = cursor.fetchall()
     
     cursor.execute(abn_req)
@@ -31,20 +31,25 @@ def process_data(his_mont):
 
     cursor.execute(sql_col_names)
     columns = [col[0] for col in cursor.fetchall()]
-    
+
     def addElement(abn):
         elements = []
         for x in data:
             if abn in x:
-                elements.append({columns[i] : x} for i in range(len(columns)))
+                elements.append(
+                    {
+                        columns[i] : x[i] for i in range(len(columns))
+                    } 
+                )
         return elements
 
     processed_data = {
         "__values__" : [
             {
-                "ABN":abn,
-                "__data__" : addElement(abn)
+                "ABN": abn[0],
+                "__data__" : addElement(abn[0])
             } for abn in abns
         ]
     }
 
+    return processed_data
