@@ -134,7 +134,7 @@ def loadMonthly(engine):
         print(e)
 
 def loadDatabase(engine):
-    fromURLtoDB()
+    # fromURLtoDB()
     loadHistorical(engine)
     loadMonthly(engine)
     return "SUCCESS"

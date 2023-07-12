@@ -18,6 +18,12 @@ def loadEtl():
     engine = create_engine('mysql+mysqlconnector://root@localhost/apra_etl', connect_args={'connect_timeout': 120})
     return loadDatabase(engine)
 
+# PRODUCTION
+# @app.route('/etl')
+# def loadEtl():
+#     engine = create_engine('mysql+mysqlconnector://Flowkai@Flowkai.mysql.pythonanywhere-services.com/apra_etl', connect_args={'connect_timeout': 120})
+#     return loadDatabase(engine)
+
 
 if __name__ == '__main__':
     app.run()
