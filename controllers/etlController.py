@@ -9,11 +9,24 @@ from sqlalchemy import create_engine
 
 def abrev(text):
     words = text.split()
-    initials = [word[0] for word in words]
-    abbreviation = ''.join(initials).upper()
+    abbreviation = '_'.join(words).lower().replace(':', '').replace('-', '_')
+    truncated_abbreviation = abbreviation[:64]
+    return truncated_abbreviation
+
+
+def separate(text):
+    words = text.split()
+    print(words)
+    if '-' in words[:-1]:
+        print(True)
+        i = words.index('-')
+        splited = words[i].split('-')
+        words = words[:i] + splited + words[i+1:]
+    abbreviation = '_'.join(words).upper()
+
+    input()
     
     return abbreviation
-
 
 def fromURLtoDB():
     url = "https://www.apra.gov.au/monthly-authorised-deposit-taking-institution-statistics"
@@ -29,8 +42,6 @@ def fromURLtoDB():
             excel_links.append(href)
         else:
             pass
-        
-    print(excel_links)
 
     # Creamos las carpetas si no existen
     if not os.path.exists("./data/historical"):
@@ -64,7 +75,7 @@ def getDB():
         c = db.cursor(dictionary=True)
         return db, c
 
-def loadHistorical():
+def loadHistorical(engine):
     folder = "./data/historical/"
     files = os.listdir(folder)
     files = [f for f in files]
@@ -90,14 +101,12 @@ def loadHistorical():
 
 
     try:
-        engine = create_engine('mysql+mysqlconnector://root@localhost/apra_etl', connect_args={'connect_timeout': 120})
-
         historical_df.to_sql('datos_historicos', con=engine, if_exists='replace', chunksize=1000)
     except Exception as e:
         print(e)
 
 
-def loadMonthly():
+def loadMonthly(engine):
     folder = "./data/monthly/"
     files = os.listdir(folder)
     files = [f for f in files]
@@ -120,14 +129,12 @@ def loadMonthly():
                 # Update the DataFrame with the abbreviated column name
                 df.rename(columns={col: abbr}, inplace=True)
     try:
-        engine = create_engine('mysql+mysqlconnector://root@localhost/apra_etl', connect_args={'connect_timeout': 120})
-
         df.to_sql('datos_mensuales', con=engine, if_exists='replace', chunksize=1000)
     except Exception as e:
         print(e)
 
-def loadDatabase():
+def loadDatabase(engine):
     fromURLtoDB()
-    loadHistorical()
-    loadMonthly()
+    loadHistorical(engine)
+    loadMonthly(engine)
     return "SUCCESS"

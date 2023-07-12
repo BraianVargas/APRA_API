@@ -15,7 +15,8 @@ def getMonthly():
 
 @app.route('/etl')
 def loadEtl():
-    return loadDatabase()
+    engine = create_engine('mysql+mysqlconnector://root@localhost/apra_etl', connect_args={'connect_timeout': 120})
+    return loadDatabase(engine)
 
 
 if __name__ == '__main__':
